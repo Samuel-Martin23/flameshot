@@ -4,6 +4,7 @@
 #pragma once
 
 #include <QTextEdit>
+#include <QGraphicsDropShadowEffect>
 
 class TextWidget : public QTextEdit
 {
@@ -13,6 +14,8 @@ public:
 
     void adjustSize();
     void setFont(const QFont& f);
+
+    void setBorderFont(QGraphicsEffect *f);
 
 protected:
     void showEvent(QShowEvent* e);

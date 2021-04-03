@@ -39,6 +39,12 @@ void TextWidget::setFont(const QFont& f)
     adjustSize();
 }
 
+void TextWidget::setBorderFont(QGraphicsEffect *f)
+{
+    QWidget::setGraphicsEffect(f);
+    adjustSize();
+}
+
 void TextWidget::updateFont(const QFont& f)
 {
     setFont(f);

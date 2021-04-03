@@ -18,6 +18,7 @@ public:
     void setStrikeOut(const bool s);
     void setWeight(const int w);
     void setItalic(const bool i);
+    void setBorder(const bool b);
 
 signals:
     void fontFamilyChanged(const QString& f);
@@ -25,6 +26,7 @@ signals:
     void fontStrikeOutChanged(const bool dashed);
     void fontWeightChanged(const QFont::Weight w);
     void fontItalicChanged(const bool italic);
+    void fontBorderChanged(const bool border);
 
 public slots:
 
@@ -37,4 +39,5 @@ private:
     QPushButton* m_underlineButton;
     QPushButton* m_weightButton;
     QPushButton* m_italicButton;
+    QPushButton* m_borderButton;
 };

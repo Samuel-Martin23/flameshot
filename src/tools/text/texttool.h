@@ -5,6 +5,7 @@
 
 #include "src/tools/capturetool.h"
 #include <QPointer>
+#include <QGraphicsDropShadowEffect>
 
 class TextWidget;
 class TextConfig;
@@ -55,10 +56,12 @@ private slots:
     void updateFontStrikeOut(const bool s);
     void updateFontWeight(const QFont::Weight w);
     void updateFontItalic(const bool italic);
+    void updateFontBorder(const bool border);
 
 private:
     QFont m_font;
     QString m_text;
+    QGraphicsDropShadowEffect m_effect;
     int m_size;
     QColor m_color;
     QPixmap m_pixmapBackup;

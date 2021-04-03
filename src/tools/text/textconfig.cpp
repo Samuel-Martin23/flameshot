@@ -65,6 +65,19 @@ TextConfig::TextConfig(QWidget* parent)
             this,
             &TextConfig::fontItalicChanged);
     m_italicButton->setToolTip(tr("Italic"));
+
+
+
+    m_borderButton = new QPushButton(QIcon(iconPrefix + "format_bold.svg"),
+                                     QLatin1String(""));
+    m_borderButton->setCheckable(true);
+    connect(m_borderButton,
+            &QPushButton::clicked,
+            this,
+            &TextConfig::fontBorderChanged);
+    m_borderButton->setToolTip(tr("Border"));
+
+
     QHBoxLayout* modifiersLayout = new QHBoxLayout();
 
     m_layout->addWidget(fontsCB);
@@ -72,6 +85,7 @@ TextConfig::TextConfig(QWidget* parent)
     modifiersLayout->addWidget(m_underlineButton);
     modifiersLayout->addWidget(m_weightButton);
     modifiersLayout->addWidget(m_italicButton);
+    modifiersLayout->addWidget(m_borderButton);
     m_layout->addLayout(modifiersLayout);
 }
 
@@ -103,3 +117,9 @@ void TextConfig::weightButtonPressed(const bool w)
         emit fontWeightChanged(QFont::Normal);
     }
 }
+
+void TextConfig::setBorder(const bool b)
+{
+    m_borderButton->setChecked(b);
+}
+

@@ -59,6 +59,11 @@ QWidget* TextTool::widget()
     w->setTextColor(m_color);
     m_font.setPointSize(m_size + BASE_POINT_SIZE);
     w->setFont(m_font);
+    /*
+    w->setGraphicsEffect(&m_effect);
+    printf("CALLED 1\n");
+    */
+
     connect(w, &TextWidget::textUpdated, this, &TextTool::updateText);
     m_widget = w;
     return w;
@@ -85,10 +90,15 @@ QWidget* TextTool::configurationWidget()
             &TextConfig::fontWeightChanged,
             this,
             &TextTool::updateFontWeight);
+    connect(m_confW,
+            &TextConfig::fontBorderChanged,
+            this,
+            &TextTool::updateFontBorder);
     m_confW->setItalic(m_font.italic());
     m_confW->setUnderline(m_font.underline());
     m_confW->setStrikeOut(m_font.strikeOut());
     m_confW->setWeight(m_font.weight());
+    m_confW->setBorder(!m_effect.isEnabled());
     return m_confW;
 }
 
@@ -109,7 +119,10 @@ CaptureTool* TextTool::copy(QObject* parent)
             &TextTool::updateFontUnderline);
     connect(
       m_confW, &TextConfig::fontWeightChanged, tt, &TextTool::updateFontWeight);
+    connect(
+      m_confW, &TextConfig::fontBorderChanged, tt, &TextTool::updateFontBorder);
     tt->m_font = m_font;
+    //tt->m_effect = m_effect;
     return tt;
 }
 
@@ -261,5 +274,17 @@ void TextTool::updateFontItalic(const bool italic)
     m_font.setItalic(italic);
     if (m_widget) {
         m_widget->setFont(m_font);
+    }
+}
+
+void TextTool::updateFontBorder(const bool border)
+{
+    QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect();
+    effect->setBlurRadius(5);
+    effect->setColor(Qt::black);
+    effect->setOffset(0, 0);
+
+    if (m_widget) {
+        m_widget->setBorderFont(effect);
     }
 }
